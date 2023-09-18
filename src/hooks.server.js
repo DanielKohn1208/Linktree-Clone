@@ -7,7 +7,7 @@ start_mongo().then(() => {
 	console.error(e)
 })
 
-const unprotectedRoutes = ["/", "/sign-in", "/login", "/register", "/api"]
+const unprotectedRoutes = ["/", "/sign-in", "/login", "/register"]
 
 export async function handle({ event, request, resolve }) {
 	const query = event.url.searchParams.get('signout')
@@ -39,7 +39,5 @@ export async function handle({ event, request, resolve }) {
 			throw redirect(303, '/')
 		}
 	}
-	
-
 	return await resolve(event)
 }
