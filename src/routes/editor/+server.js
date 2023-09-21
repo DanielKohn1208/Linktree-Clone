@@ -6,6 +6,5 @@ export async function POST({request, cookies}) {
 	const {tree}= await request.json();
 	const session_id = cookies.get('session_id')
 	await users.updateOne({session_id: session_id},{$set:{linktree: tree}})
-	console.log("ERROR")
 	return json("success")
 }

@@ -7,6 +7,7 @@
 	let type;
 	function addData(data) {
 		toggleForm();
+		data.id=crypto.randomUUID()
 		tree.update((n) => [...n, data]);
 		console.log('sending fetch request')
 		fetch('/editor', {
