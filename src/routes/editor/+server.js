@@ -1,11 +1,11 @@
 import {users} from "$db/users"
 import {json} from "@sveltejs/kit"
+import { v4 as uuidv4 } from 'uuid'
 
 export async function POST({request, cookies}) {
-	const json = await request.json();
-	console.log("THIS IS THE SERVER")
-	console.log(json)
+	const {tree}= await request.json();
 	const session_id = cookies.get('session_id')
-	await users.updateOne({session_id: session_id},{$set:{linktree: json.tree}})
+	await users.updateOne({session_id: session_id},{$set:{linktree: tree}})
+	console.log("ERROR")
 	return json("success")
 }
