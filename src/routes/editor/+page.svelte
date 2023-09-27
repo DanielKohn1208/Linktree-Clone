@@ -7,9 +7,12 @@
 	import Instagramdisplay from '$lib/Instagramdisplay.svelte';
 	import Settingsmodal from '$lib/Settingsmodal.svelte';
 
+	// constants
+	const isEditing = true;
+
 	//data manipulation
 	tree.init(data.linktree);
-	$:console.log($tree)
+	$: console.log($tree);
 
 	//UI manipulation
 	let isFormOpen = false;
@@ -29,7 +32,7 @@
 
 	async function handleDndFinalize(e) {
 		tree.set(e.detail.items);
-		pushData()
+		pushData();
 	}
 	async function pushData() {
 		const treeVal = $tree;
@@ -78,6 +81,22 @@
 					{:else if item.type == 'instagram'}
 						<Instagramdisplay {item} />
 					{/if}
+					<button
+						class="delete"
+						on:click={() => {
+							console.log('BUTTON PUSHED!');
+							tree.update((n) => {
+								const newArray = []
+								n.forEach(t =>{
+									if(t.id != item.id){
+										newArray.push(t)
+									}
+								})
+								return newArray
+							});
+							pushData();
+						}}
+					/>
 				</div>
 			{/each}
 		</section>
