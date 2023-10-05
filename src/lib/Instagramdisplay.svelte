@@ -1,5 +1,6 @@
 <script>
 	export let item;
+	export let deleteItem
 </script>
 
 <div class="box ig-bg">
@@ -14,7 +15,9 @@
 			/></svg
 		>
 		<p class="ig-fg is-bold is-size-3 ">@{item.username}</p>
+
 	</a>
+		<button on:click={()=> deleteItem(item.id)} class="delete" />
 </div>
 
 <style>

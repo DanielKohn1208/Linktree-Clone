@@ -14,6 +14,20 @@
 	tree.init(data.linktree);
 	$: console.log($tree);
 
+	function deleteItem(id) {
+		console.log('BUTTON PUSHED!');
+		tree.update((n) => {
+			const newArray = [];
+			n.forEach((t) => {
+				if (t.id != id) {
+					newArray.push(t);
+				}
+			});
+			return newArray;
+		});
+		pushData();
+	}
+
 	//UI manipulation
 	let isFormOpen = false;
 	let modalOpen = false;
@@ -79,24 +93,8 @@
 							<a href={item.link}>{item.title}</a>
 						</div>
 					{:else if item.type == 'instagram'}
-						<Instagramdisplay {item} />
+						<Instagramdisplay {item} {deleteItem}/>
 					{/if}
-					<button
-						class="delete"
-						on:click={() => {
-							console.log('BUTTON PUSHED!');
-							tree.update((n) => {
-								const newArray = []
-								n.forEach(t =>{
-									if(t.id != item.id){
-										newArray.push(t)
-									}
-								})
-								return newArray
-							});
-							pushData();
-						}}
-					/>
 				</div>
 			{/each}
 		</section>

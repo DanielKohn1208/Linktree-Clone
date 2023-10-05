@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit'
-import { users, updateSession } from "$db/users"
+import { users, updateSession, isValidCredentials } from "$db/users"
 import { toJson, } from "$db/mongo"
 import { v4 as uuidv4 } from 'uuid'
 
@@ -15,17 +15,18 @@ export const actions = {
 			})
 		}
 
-		const user = await users
-			.find({ username: username, password: password })
-			.toArray()
-
-		if (user.length === 0) {
+		const valid = await isValidCredentials(username, password)
+		console.log("IS THIS VALID: " + valid)
+		if (!valid) {
 			return fail(422, {
 				description: "USERNAME AND PASSWORD MUST BE VALID",
 				error: "USERNAME AND PASSWORD MUST BE VALID"
 			})
 		}
 
+		const user = await users
+			.find({ username: username})
+			.toArray()
 		const parsedUser = toJson(user[0])
 
 		const session_id = uuidv4()

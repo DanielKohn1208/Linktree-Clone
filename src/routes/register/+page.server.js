@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit'
-import { users, updateSession } from "$db/users"
+import { users, addUser  } from "$db/users"
 import { toJson, } from "$db/mongo"
 import { v4 as uuidv4 } from 'uuid'
 
@@ -23,7 +23,10 @@ export const actions = {
 			})
 		}
 		const session_id = uuidv4()
-		await users.insertOne({ username: username, password: password, session_id: session_id })
+		// await users.insertOne({ username: username, password: password, session_id: session_id })
+		console.log("ADDIN USER")
+		await addUser(username, password, session_id)
+		console.log("USER ADDED")
 		cookies.set('session_id', session_id, {
 			path: '/',
 			httpOnly: true,
