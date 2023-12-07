@@ -20,6 +20,9 @@ export async function addUser(username, password, session_id) {
 
 export async function isValidCredentials(username, password) {
 	const user = await users.findOne({username: username})
+	if(!user){
+		return false
+	}
 	const hash = user.password
 	const result = await bcrypt.compare(password, hash)
 	return result
