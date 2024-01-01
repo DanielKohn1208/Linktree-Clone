@@ -10,8 +10,8 @@
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
-		<a class="navbar-item" href="https://bulma.io">
-			<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+		<a class="navbar-item is-size-4 has-text-weight-bold" href="/">
+			<p>Linktree-Clone</p>
 		</a>
 
 		<a

@@ -3,6 +3,7 @@
 	import Titleform from '$lib/Titleform.svelte';
 	import Link from '$lib/Link.svelte';
 	import Instagramform from './Instagramform.svelte';
+	import YoutubeVideoform from './YoutubeVideoform.svelte';
 	export let toggleForm;
 	let type;
 	function addData(data) {
@@ -33,7 +34,7 @@
 					<option value="title">Title</option>
 					<option value="link">Link</option>
 					<option value="instagram">Instagram</option>
-					<option value="other">OTHER</option>
+					<option value="youtube-channel">Youtube Channel</option>
 				</select>
 			</div>
 			<div />
@@ -44,8 +45,8 @@
 			<Link {addData} />
 		{:else if type == 'instagram'}
 			<Instagramform {addData} />
-		{:else}
-			<p>THis is not</p>
+		{:else if type == 'youtube-channel'}
+			<YoutubeVideoform {addData} />
 		{/if}
 	</div>
 </form>
